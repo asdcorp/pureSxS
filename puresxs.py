@@ -79,7 +79,7 @@ def generate_sxs_name(pkg, *, winners = False):
     pseudo_key = generate_pseudo_key(pkg, winners=winners)
     sxs_name = []
 
-    name = re.sub('[\\(\\)\\\\\\/ \+*!@#$%^&\\[\\]]', '', pkg['name'])
+    name = re.sub(r'[^A-z0-9\-\._]', '', pkg['name'])
 
     if len(name) > 40:
         name = name[:19] + '..' + name[-19:]
@@ -320,7 +320,7 @@ def parse_package(file, destination):
     return True
 
 if __name__ == '__main__':
-    version = '1.0'
+    version = '1.1'
 
     if sys.platform != 'win32':
         print('CBS packages can only be extracted on Windows')
